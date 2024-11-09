@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Your Mangoes Health!</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <h1>Check Your Mangoes Health!</h1>
+    <section>
+        <form method="post" enctype="multipart/form-data" action="/">
+            <label for="images" class="drop-container" id="dropcontainer">
+                <span class="drop-title">Drop files here or click to upload</span>
+                <input name="file" type="file" id="images" accept="image/*" required>
+                <span id="image-preview"></span>
+                <img id="output" alt="Output Image">
+            </label>
+            <div id="submit-wrap">
+                <button id="submit" type="submit">Submit to Check</button>
+            </div>
+        </form>
+        {% if img_path %}
+            <h2>Processed Image</h2>
+            <img src="{{ img_path }}" alt="Processed Image" style="display: block; margin: 0 auto;">
+        {% endif %}
+
+        {% if result %}
+            <h2>Tingkat Kematangan: {{ result }} with {{ confidence | round(2) }}% confidence</h2>
+        {% endif %}
+
+    </section>
+</body>
+<script type="text/javascript" src="../static/js/scripts.js"></script>
+</html>
