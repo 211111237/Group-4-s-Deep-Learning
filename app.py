@@ -7,7 +7,7 @@ import tensorflow as tf
 import numpy as np
 
 # Initialize Flask and set upload folder
-app = Flask(__name__)
+app = Flask(_name_)
 upload_folder = "static/uploads"
 app.config["SECRET_KEY"] = "SecretKey"
 app.config["UPLOAD_FOLDER"] = upload_folder
@@ -33,7 +33,6 @@ def prepare_image(image_path):
     img = img / 255.0  # Normalisasi ke rentang [0,1]
     img = np.expand_dims(img, axis=0)  # Tambahkan dimensi batch
     return img
-
 
 @app.route("/", methods=["GET", "POST"])
 def upload_file():
@@ -64,5 +63,10 @@ def upload_file():
     
     return render_template("index.html")
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# Buat folder upload jika belum ada
+if not os.path.exists(upload_folder):
+    os.makedirs(upload_folder)
+
+# Flask app untuk Vercel
+app = app
+
